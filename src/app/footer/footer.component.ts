@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FakeDataService } from '../services/fake-data.service';
+import {NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  public data;
+  public locationPathname: string;
+
+  constructor(public FakeData: FakeDataService, public router: Router) {
+    this.data = this.FakeData.getData();
+    console.log('route', this.router.url);
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.locationPathname = event.url;
+      }
+    });
+  }
 
   ngOnInit() {
   }

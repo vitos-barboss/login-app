@@ -1,3 +1,12 @@
-<p>
-  header works!
-</p>
+<div class="container">
+  <div class="logo">
+    LOGO
+  </div>
+  <div class="right">
+    <a class="sign-out" (click)="logOut()" *ngIf="locationPathname !== '/login'">Sign Out</a>
+
+    <select [(ngModel)]="selectedLang" (change)="onChange($event)">
+      <option *ngFor="let lang of langList">{{ lang }}</option>
+    </select>
+  </div>
+</div>
